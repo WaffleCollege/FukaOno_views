@@ -22,6 +22,34 @@
             <button type="submit" class="jelly-btn" onclick="return confirm('本当に削除しますか？')">削除</button>
         </form>
 
+        <h2>コメント</h2>
+        {% if blog.comments %}
+            <ul>
+                {% for c in blog.comments %}
+                <li>
+                    <strong>{{ c.user_name }}</strong> ({{ c.created_at.strftime('%Y-%m-%d %H:%M') }})<br>
+                    {{ c.body }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>まだコメントはありません。</p>
+        {% endif %}
+        <hr>
+
+
+
+        <h3>コメントを書く</h3>
+        <form method="POST" action="{{ url_for('blogs.add_comment', blog_id=blog.id) }}">
+        <label>名前：</label><br>
+        <input type="text" name="user_name"><br><br>
+
+        <label>コメント：</label><br>
+        <textarea name="body" rows="4"></textarea><br><br>
+
+        <button type="submit">投稿</button>
+        </form>
+
         <p><a href="{{ url_for('blogs.index') }}">← 一覧に戻る</a></p>
     </div>
 </body>
