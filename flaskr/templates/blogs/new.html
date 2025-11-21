@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>新規ブログ投稿</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
 </head>
 <body>
+  <div class="jelly-card">
     <h1>新しいブログを書く</h1>
+
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
@@ -33,10 +36,11 @@
             </label>
         </p>
         <p>
-            <button type="submit">投稿する</button>
+            <button type="submit" class="jelly-btn">投稿する</button>
         </p>
     </form>
 
     <p><a href="{{ url_for('blogs.index') }}">一覧に戻る</a></p>
+  </div>
 </body>
 </html>
